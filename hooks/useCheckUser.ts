@@ -1,8 +1,8 @@
 import * as SQLite from 'expo-sqlite';
 import { User } from '../types/types';
 
-SQLite.deleteDatabaseAsync('mydb');
-console.log('all users deleted.');
+// SQLite.deleteDatabaseAsync('mydb');
+// console.log('all users deleted.');
 const dbPromise = SQLite.openDatabaseAsync('mydb');
 
 export const checkUserLoggedIn = async (): Promise<boolean | null> => {

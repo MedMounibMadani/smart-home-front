@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { getUser, storeUser } from '@/hooks/useCheckUser';
 import { setUser } from '../../store/userSlice';
+import { setDevices } from '../../store/deviceSlice';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { HelloWave } from '@/components/HelloWave';
@@ -20,6 +21,7 @@ import { Device } from '@/components/Device';
 
 export default function HomeScreen() {
   const user = useSelector((state: RootState) => state.user);
+  const deviceState = useSelector((state: RootState) => state.devices);
   const backgroundColor = useThemeColor({}, 'background');
   const oppositeBackgroundColor = useThemeColor({}, 'background', true);
   const textColor = useThemeColor({}, 'text');
@@ -134,6 +136,13 @@ export default function HomeScreen() {
           });
           const data = await response.json();
           setdevices(data.devices);
+          const mappedDevices = data.devices?.thingList?.map( (item:any) => ({
+            id: item.itemData.deviceid,
+            name: item.itemData.name,
+            group: item.itemData.devGroups && item.itemData.devGroups.length > 0 ? item.itemData.devGroups[0].groupId : null,
+          }));        
+          dispatch(setDevices(mappedDevices));  
+          // console.log(deviceState);
         } catch (error) {
           console.log('Error fetching devices :', error);
         }
@@ -202,7 +211,7 @@ export default function HomeScreen() {
           devices.thingList
           .filter(item => item.itemData.family.roomid === currentRoom?.id)
           .map((item, index) => (
-            <Device key={index} device={item} isOn={item.itemData.params?.switch == "on"} />
+            <Device key={item.itemData.deviceid} device={item} isOn={item.itemData.params?.switch == "on"} accessToken={user.accessToken} />
           ))
         ) : (
           <ActivityIndicator size={"large"} />
