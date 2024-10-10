@@ -18,6 +18,16 @@
     roomList: Room[];
   }
 
+  export interface Action {
+    _id: string;
+    actionName: string;
+    actionType: string;
+    actionDate: string; 
+    devices: string[];
+    enabled: boolean;
+    user: string;
+  }
+
   export interface DevicesResponse {
     thingList: ThingListItem[];
     total: number;

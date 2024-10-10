@@ -24,7 +24,7 @@ export function Collapsible({ children, title, status }: PropsWithChildren & { t
               activeOpacity={0.8}>
                 <Ionicons
                   name={isOpen ? 'chevron-up' : 'chevron-down-outline'}
-                  size={18}
+                  size={28}
                   color={theme === 'light' ? Colors.dark.icon : Colors.light.icon}
                 />
             </TouchableOpacity>
