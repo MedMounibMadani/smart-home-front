@@ -136,13 +136,14 @@ export default function HomeScreen() {
           });
           const data = await response.json();
           setdevices(data.devices);
-          const mappedDevices = data.devices?.thingList?.map( (item:any) => ({
-            id: item.itemData.deviceid,
-            name: item.itemData.name,
-            group: item.itemData.devGroups && item.itemData.devGroups.length > 0 ? item.itemData.devGroups[0].groupId : null,
+          const mappedDevices = data.devices?.thingList?.filter( (device:any) => device.itemType !== 3 )
+            .map( (item:any) => ({
+              id: item.itemData.deviceid,
+              name: item.itemData.name,
+              group: item.itemData.devGroups && item.itemData.devGroups.length > 0 ? item.itemData.devGroups[0].groupId : null,
+              room: item.itemData.family.roomid
           }));        
           dispatch(setDevices(mappedDevices));  
-          // console.log(deviceState);
         } catch (error) {
           console.log('Error fetching devices :', error);
         }
@@ -209,7 +210,7 @@ export default function HomeScreen() {
       <ScrollView style={styles.devicesList} showsVerticalScrollIndicator={false}>
         {devices ? (
           devices.thingList
-          .filter(item => item.itemData.family.roomid === currentRoom?.id)
+          .filter(item => item.itemData.family.roomid === currentRoom?.id && item.itemType !== 3)
           .map((item, index) => (
             <Device key={item.itemData.deviceid} device={item} isOn={item.itemData.params?.switch == "on"} accessToken={user.accessToken} />
           ))

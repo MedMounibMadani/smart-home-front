@@ -4,6 +4,7 @@ interface Device {
   id: string;
   name: string;
   group: string;
+  room: string;
 }
 
 interface DeviceState {
