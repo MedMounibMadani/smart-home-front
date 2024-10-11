@@ -192,7 +192,7 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="subtitle">Welcome {user.fullname.split(' ', 1)}</ThemedText>
+        <ThemedText type="subtitle">Bonjour {user.fullname.split(' ', 1)}</ThemedText>
         <HelloWave />
         <ThemedText type="subtitle">!</ThemedText>
       </ThemedView>

@@ -93,9 +93,9 @@ export function Device( {device, isOn, accessToken}: Props ) {
             /> : <></> }
         >
             <View>
-                <Text style={[styles.content, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>Brand : {device.itemData.brandName}</Text>
-                <Text style={[styles.content, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>Model : {device.itemData.productModel}</Text>
-                <Text style={[styles.content, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>Manufacturer : {device.itemData.extra.manufacturer}</Text>
+                <Text style={[styles.content, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>Marque : {device.itemData.brandName}</Text>
+                <Text style={[styles.content, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>Modèle : {device.itemData.productModel}</Text>
+                <Text style={[styles.content, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>Fabricant : {device.itemData.extra.manufacturer}</Text>
                 {device.itemData.params?.brightness ?
                 <>
                   <View style={styles.brightness}>
@@ -116,14 +116,14 @@ export function Device( {device, isOn, accessToken}: Props ) {
                     <View style={styles.onlineStatus}>
                         <AntDesign name="checkcircle" size={20} color="green" />
                         <Text style={[styles.onlineText, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>
-                            Online
+                            En ligne
                         </Text>
                     </View>
                 ) : (
                     <View style={styles.onlineStatus}>
                         <AntDesign name="closecircle" size={20} color="red" />
                         <Text style={[styles.onlineText, { color: theme === 'light' ? Colors.dark.text : Colors.light.text }]}>
-                            Offline
+                            Hors ligne
                         </Text>
                     </View>
                 )}

@@ -37,7 +37,9 @@ export default function Explore() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
-  
+  const isDisabled = actionName.length === 0 || actionType.length === 0 || selectedDevices.length === 0;
+  const isValidDate = selectedDate > new Date();
+
   const fetchActions = async () => {
     try {
       const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/actions`, {
@@ -130,7 +132,8 @@ export default function Explore() {
     }
   };
   
-  const submit = async () => {
+  const submit = async () => {   
+    setFormVisibility(false);
     try {
       const response = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/action/save`, {
         method: 'POST',
@@ -156,7 +159,6 @@ export default function Explore() {
         setActionType('');
         setSelectedDate(new Date());
         setSelectedDevices([]);
-        setFormVisibility(false);
         fetchActions();
       }
     } catch (error) {
@@ -288,8 +290,12 @@ export default function Explore() {
                   ))
                 }
               </ThemedView>
-              <TouchableOpacity style={ [ styles.saveButton, { backgroundColor: textColor } ] } onPress={submit}>
-                <ThemedText style={{ color: backgroundColor }}> Enregistrer </ThemedText>
+              <TouchableOpacity 
+                style={ [ styles.saveButton, { backgroundColor: textColor } ] } 
+                onPress={submit}
+                disabled={ isDisabled || !isValidDate }
+              >
+                <ThemedText style={{ color: backgroundColor }}> { isDisabled ? 'Veuillez remplir tous les champs' : ( isValidDate ? 'Enregistrer' : 'Veuillez choisir une date future' ) } </ThemedText>
               </TouchableOpacity>
             </ThemedView> 
           }
