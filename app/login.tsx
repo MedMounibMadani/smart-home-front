@@ -71,12 +71,12 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     if (!email || !fullname) {
-      Alert.alert('Validation Error', 'Please fill in both fields');
+      Alert.alert('Erreur', 'Veuillez remplir les deux champs');
       return;
     }
 
     if (!emailRegex.test(email)) {
-      Alert.alert('Validation Error', 'Please enter a valid email address');
+      Alert.alert('Erreur', 'Veuillez saisir une adresse mail valide');
       return;
     }
     try {
@@ -91,11 +91,11 @@ export default function LoginScreen() {
         setShowForm(false);
         // router.replace('(tabs)');
       } else {
-        Alert.alert('Login Failed', 'Invalid username or password');
+        Alert.alert('Erreur', 'Login échoué');
       }
     } catch (error) {
       console.error('Error during login:', error);
-      Alert.alert('Login Error', 'An error occurred while logging in');
+      Alert.alert('Erreur', 'Login échoué');
     }
   };
 
